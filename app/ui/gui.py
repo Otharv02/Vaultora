@@ -8,13 +8,10 @@ def uploadAction(event=None):
     # print("Selected :", filename)
 
 
-
-
-
 def launch_gui(root,username):
     root.title("Vaultora")
 
-    # create a frame and place color in the window
+    # create a frame and place color in the window (Main)
     frame = Frame(root, bg="black")
     frame.place(relwidth=1, relheight=1)
 
@@ -37,7 +34,15 @@ def launch_gui(root,username):
     log_button.pack(pady=10)
 
     # Setting
-    setting_button = Button(left_Frame, text="Upload",width=15)
+    setting_button = Button(left_Frame, text="Setting",width=15)
     setting_button.pack(pady=10)
+
+
+    # # Preview + View side 
+    # right_Frame = Frame(root, bg="black")
+    # right_Frame.place(x=0,y=0,relheight=1,relwidth=0.75)
+    
+
+
 
 
