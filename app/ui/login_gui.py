@@ -22,15 +22,19 @@ def launch_login_gui(root):
         # Remove splash
         splash_label.destroy()
 
-        # username and entry
-        Label(root, text="Username", bg="black", fg="white", font=("Helvetica", 12)).pack(pady=5)
-        username_entry = Entry(root)
-        username_entry.pack()
+        root.grid_columnconfigure((0,1), weight=1)
 
-        # password and entry
-        Label(root, text="Password", bg="black", fg="white", font=("Helvetica", 12)).pack(pady=5)
-        password_entry = Entry(root)
-        password_entry.pack()
+        # Username label and entry
+        usernameLabel = Label(root, text="Username", bg="black", fg="white", font=("Helvetica", 12), justify="center")
+        usernameLabel.grid(row=3, column=0, padx=10, pady=10, sticky="e")
+        username_entry = Entry(root)
+        username_entry.grid(row=3, column=1, padx=10, pady=10, sticky="ew")
+
+        # Password label and entry
+        passwordLabel = Label(root, text="Password", bg="black", fg="white", font=("Helvetica", 12), justify="center")
+        passwordLabel.grid(row=4, column=0, padx=10, pady=10, sticky="e")
+        password_entry = Entry(root, show="*")  # Add show="*" to hide password input
+        password_entry.grid(row=4, column=1, padx=10, pady=10, sticky="ew")
 
         def on_login():
             username = username_entry.get()      
@@ -44,7 +48,8 @@ def launch_login_gui(root):
                 messagebox.showerror("Login Failed", "Invalid Username or Password")
         # loing button
 
-        Button(root, text="Login", command=on_login).pack(pady=20)
+        login_button = Button(root, text="Login", command=on_login)
+        login_button.grid(row=5, column=0, columnspan=2, pady=20)
     
     # Wait 2.5s
     root.after(2500, login)
