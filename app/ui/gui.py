@@ -1,11 +1,36 @@
 # GUI code goes here.
-
+import os
+import shutil # for peroforming operation like copy and paste on files
 from tkinter import *
+from tkinter import filedialog, messagebox
+
+destinationdirectory = os.path.abspath(os.path.join("data")) ## <- DO NOT EDIT
+selected_file = []
 
 def uploadAction(event=None):
-    from tkinter import filedialog
-    filename = filedialog.askopenfilename()
-    # print("Selected :", filename)
+    
+    global selected_file
+    selected_file = list(filedialog.askopenfilenames())
+    print(selected_file)
+
+    if not selected_file:
+        messagebox.showerror("Error, No file selected")
+        return
+    
+    if not os.path.exists(destinationdirectory):
+        os.makedirs(destinationdirectory)
+
+    for file in selected_file:
+        try:
+            filename = os.path.basename(file) #file name
+            dest_path = os.path.join(destinationdirectory,filename) # destinationdirectory + filename 
+            shutil.copy2(file, dest_path) # this will vopy and then move
+        except Exception as e:
+            messagebox.showerror("Error", f"Failed to move file: {file}\n{e}")
+            return
+
+    
+
 
 
 def launch_gui(root,username):
@@ -41,7 +66,7 @@ def launch_gui(root,username):
     # # Preview + View side 
     # right_Frame = Frame(root, bg="black")
     # right_Frame.place(x=0,y=0,relheight=1,relwidth=0.75)
-    
+
 
 
 
